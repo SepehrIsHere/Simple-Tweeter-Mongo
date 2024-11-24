@@ -20,4 +20,6 @@ public interface TweetService {
     List<TweetDto> findAll();
 
     TweetDto findById(long id);
+
+    TweetDto register(TweetDto tweetDto);
 }

@@ -95,7 +95,18 @@ public class TweetServiceImpl implements TweetService {
             return mapperUtil.convertToDto(tweet);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new TweetOperationException("An error occurred while finding the tweet");
+            throw new TweetOperationException("An error occurred while finding the tweet ");
+        }
+    }
+
+    @Override
+    public TweetDto register(TweetDto tweetDto) {
+        try{
+            save(mapperUtil.convertToEntity(tweetDto));
+            return tweetDto;
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new TweetOperationException("An error occurred while registering a tweet ");
         }
     }
 }

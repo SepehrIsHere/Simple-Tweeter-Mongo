@@ -10,6 +10,8 @@ import org.practice.mongopractice.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -65,6 +67,40 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             e.printStackTrace();
             throw new UserOperationException(e.getMessage());
+        }
+    }
+
+    @Override
+    public UserDto register(UserDto userDto) {
+        try {
+            save(mapperUtil.convertToEntity(userDto));
+            return userDto;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new UserOperationException("An error occurred while registering a user");
+        }
+    }
+
+    @Override
+    public List<UserDto> findAll() {
+        try {
+            return userRepository.findAll()
+                    .stream()
+                    .map(mapperUtil::convertToDto)
+                    .toList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new UserOperationException("An error occurred while finding all users");
+        }
+    }
+
+    @Override
+    public void delete(UserDto userDto) {
+        try {
+            userRepository.delete(mapperUtil.convertToEntity(userDto));
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new UserOperationException("An error occured while deleting a user ");
         }
     }
 }
