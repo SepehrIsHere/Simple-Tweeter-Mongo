@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.practice.mongopractice.config.MapperUtil;
 import org.practice.mongopractice.dto.UserDto;
 import org.practice.mongopractice.entities.User;
+import org.practice.mongopractice.exception.UserNotFoundException;
 import org.practice.mongopractice.exception.UserOperationException;
 import org.practice.mongopractice.repository.UserRepository;
 import org.practice.mongopractice.service.UserService;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -51,9 +53,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto findByEmail(String email) {
+    public User findByEmail(String email) {
         try {
-            return mapperUtil.convertToDto(userRepository.findByEmail(email));
+            return userRepository.findByEmail(email);
         } catch (Exception e) {
             e.printStackTrace();
             throw new UserOperationException(e.getMessage());
@@ -101,6 +103,16 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             e.printStackTrace();
             throw new UserOperationException("An error occured while deleting a user ");
+        }
+    }
+
+    @Override
+    public User findById(Long id) {
+        try {
+            return userRepository.findByUserId(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new UserOperationException("An error occured while finding user by id");
         }
     }
 }

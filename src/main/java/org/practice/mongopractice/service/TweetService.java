@@ -22,4 +22,5 @@ public interface TweetService {
     TweetDto findById(long id);
 
     TweetDto register(TweetDto tweetDto);
+
 }

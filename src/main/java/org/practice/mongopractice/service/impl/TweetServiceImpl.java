@@ -109,4 +109,5 @@ public class TweetServiceImpl implements TweetService {
             throw new TweetOperationException("An error occurred while registering a tweet ");
         }
     }
+
 }
