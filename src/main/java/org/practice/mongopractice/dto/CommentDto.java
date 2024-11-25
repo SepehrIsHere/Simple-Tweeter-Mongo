@@ -8,9 +8,8 @@ import org.practice.mongopractice.entities.User;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TweetDto {
+public class CommentDto {
     private Long id;
-    private String postHeader;
     private String text;
-    private UserDto userDto;
+    private User user;
 }

@@ -1,6 +1,7 @@
 package org.practice.mongopractice.dto;
 
 import lombok.*;
+import org.practice.mongopractice.entities.Tweet;
 import org.practice.mongopractice.entities.User;
 
 @Getter
@@ -8,9 +9,9 @@ import org.practice.mongopractice.entities.User;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TweetDto {
+public class ReplyDto {
     private Long id;
-    private String postHeader;
-    private String text;
-    private UserDto userDto;
+    private String replyText;
+    private User repliedUser;
+    private Tweet tweet;
 }
