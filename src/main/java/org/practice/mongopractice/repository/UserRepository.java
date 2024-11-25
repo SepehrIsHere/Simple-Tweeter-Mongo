@@ -6,6 +6,8 @@ import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface UserRepository extends MongoRepository<User, Long> {
     @Query("{'email' : :#{#email}}")
@@ -13,4 +15,7 @@ public interface UserRepository extends MongoRepository<User, Long> {
 
     @Query("$and: [ { 'firstName' : :#{#firstName} }, {'lastName' : :#{#lastName} } ]")
     User findByFirstNameAndLastName(@Param("firstName")String firstName,@Param("lastName")String lastName);
+
+    @Query("{'id' : :#{#id}}")
+    User findByUserId(@Param("id")Long id);
 }
