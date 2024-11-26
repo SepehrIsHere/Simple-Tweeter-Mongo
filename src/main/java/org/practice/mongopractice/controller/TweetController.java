@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.practice.mongopractice.config.MapperUtil;
 import org.practice.mongopractice.dto.TweetDto;
 import org.practice.mongopractice.dto.UserDto;
+import org.practice.mongopractice.entities.User;
 import org.practice.mongopractice.service.TweetService;
 import org.practice.mongopractice.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -40,12 +41,14 @@ public class TweetController {
 
     @PostMapping("/find-by-email")
     public List<TweetDto> findUserTweet(@RequestParam String email) {
-        UserDto userDto = userService.findByEmail(email);
-        return tweetService.findByUser(userDto);
+        User user = userService.findByEmail(email);
+        return tweetService.findByUser(mapperUtil.convertToDto(user));
     }
 
     @GetMapping("/find-all")
     public List<TweetDto> findAll() {
         return tweetService.findAll();
     }
+
+
 }

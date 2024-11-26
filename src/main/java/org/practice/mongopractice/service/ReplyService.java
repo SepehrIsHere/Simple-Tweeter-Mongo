@@ -19,4 +19,6 @@ public interface ReplyService {
     List<ReplyDto> findByUser(User user);
 
     List<ReplyDto> findByTweet(Tweet tweet);
+
+    ReplyDto register(ReplyDto dto);
 }

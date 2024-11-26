@@ -3,6 +3,7 @@ package org.practice.mongopractice.controller;
 import lombok.RequiredArgsConstructor;
 import org.practice.mongopractice.config.MapperUtil;
 import org.practice.mongopractice.dto.UserDto;
+import org.practice.mongopractice.entities.User;
 import org.practice.mongopractice.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,8 +25,8 @@ public class UserController {
 
     @PostMapping("/email")
     public ResponseEntity<UserDto> findByEmail(@RequestParam String email) {
-        UserDto userDto = userService.findByEmail(email);
-        return ResponseEntity.ok(userDto);
+        User user = userService.findByEmail(email);
+        return ResponseEntity.ok(mapperUtil.convertToDto(user));
     }
 
     @PostMapping("/first-and-last")
@@ -36,7 +37,7 @@ public class UserController {
 
     @PatchMapping("/update")
     public ResponseEntity<String> update(@RequestParam String email) {
-        userService.update(mapperUtil.convertToEntity(userService.findByEmail(email)));
+        userService.update(userService.findByEmail(email));
         return ResponseEntity.ok("User with email " + email + " have been updated ");
     }
 

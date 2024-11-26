@@ -103,4 +103,19 @@ public class ReplyServiceImpl implements ReplyService {
             throw new ReplyOperationException("An error occurred while finding replies from tweet");
         }
     }
+
+    @Override
+    public ReplyDto register(ReplyDto dto) {
+        try {
+            save(Reply.builder()
+                    .replyText(dto.getReplyText())
+                    .repliedUser(dto.getRepliedUser())
+                    .tweet(dto.getTweet())
+                    .build());
+            return dto;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ReplyOperationException("An error occured while registering a reply");
+        }
+    }
 }
